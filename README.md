@@ -34,3 +34,14 @@ A nota pode ficar vazia; nota zero conta na média. As estatísticas representam
 As fichas de sete jogos foram consultadas nas páginas oficiais da Steam em 19/10/2026. O HTML inclui estúdio, publicadora, data de lançamento **na Steam**, gêneros e uma descrição resumida, com link para a fonte em cada card. Essas informações são um retrato da consulta, sem promessa de atualização automática. Não são inventadas fichas para títulos desconhecidos.
 
 Horas, notas e anotações representam exclusivamente o que o usuário registrar. O campo “Sua nota média” não usa avaliações da crítica nem avaliações de outras pessoas. O SQL cria o banco vazio, sem INSERTs de exemplo. O aplicativo não tem modo de demonstração nem salvamento simulado em memória.
+
+
+## Explorar Steam sem importar o catálogo para o Supabase
+
+A área “Explorar Steam” consulta o índice externo de jogos de [jsnli/steamappidlist](https://github.com/jsnli/steamappidlist), gerado diariamente a partir de `IStoreService/GetAppList`, com `include_games=true` e as demais categorias desativadas. A busca é feita em um Web Worker criado a partir do próprio HTML. O índice é baixado somente ao abrir a área e permanece apenas na memória da aba; não é gravado no Supabase, no localStorage nem no IndexedDB. Só 24 resultados são renderizados por página.
+
+O arquivo da fonte tinha 194.280 entradas na validação de 19/10/2026. A quantidade exibida é calculada a partir do conteúdo carregado, sem contador fixo. A completude, a atualização e a disponibilidade regional dependem da fonte e da loja; isso não é uma API oficial operada por este projeto. O catálogo não promete preços, gêneros ou descrições para títulos sem ficha verificada. Os cards oferecem links diretos para a Steam.
+
+“Adicionar” apenas preenche o formulário; a gravação ocorre depois de “Salvar jogo”. Título, plataforma escolhida, progresso e capa usam a tabela `games` existente. Jogos já cadastrados são identificados pelo título normalizado e abrem para edição, sem inclusão automática duplicada. Nenhuma tabela do catálogo precisa ser criada.
+
+O índice externo é grande (aproximadamente 20 MB antes de compressão), e a primeira abertura exige uma conexão adequada. Falhas mostram um aviso e a opção de tentar novamente ou abrir a loja oficial. As capas são solicitadas diretamente ao CDN da Steam conforme os cards entram na página; se uma imagem não existir, permanece o placeholder.
