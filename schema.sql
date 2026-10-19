@@ -50,16 +50,6 @@ to anon, authenticated using (true) with check (true);
 create policy "games_delete" on public.games for delete
 to anon, authenticated using (true);
 
--- Dados fictícios de progresso; nenhuma capa externa.
-insert into public.games (title, platform, genre, status, rating, hours_played, notes)
-values
-  ('Clair Obscur: Expedition 33', 'PC', 'RPG', 'Jogando', 10, 32.5, 'Continuar a expedição.'),
-  ('Hollow Knight: Silksong', 'Switch', 'Metroidvania', 'Quero jogar', null, 0, null),
-  ('Elden Ring', 'PS5', 'RPG de ação', 'Zerado', 10, 124, 'Uma jornada inesquecível.'),
-  ('Baldur''s Gate 3', 'PC', 'RPG', 'Jogando', 9, 68, null),
-  ('Cyberpunk 2077', 'Xbox', 'RPG de ação', 'Zerado', 9, 85.5, null),
-  ('Astro Bot', 'PS5', 'Plataforma', 'Quero jogar', null, 0, null),
-  ('Stardew Valley', 'Mobile', 'Simulação', 'Jogando', 8, 46, null),
-  ('Black Myth: Wukong', 'PC', 'RPG de ação', 'Abandonado', 7, 12, 'Talvez retomar depois.');
+-- Sem dados de exemplo. Cadastre jogos e progresso reais pelo site.
 
 commit;
